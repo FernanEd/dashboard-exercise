@@ -1,6 +1,87 @@
 import React from "react";
 import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { FiSettings } from "react-icons/fi";
+import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
-const App = () => <div>Hello</div>;
+import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
+import {
+  ECommerce,
+  Orders,
+  Calendar,
+  Employees,
+  Stacked,
+  Pyramid,
+  Customers,
+  Area,
+  Bar,
+  ColorMapping,
+  ColorPicker,
+  Editor,
+  Financial,
+  Kanban,
+  Line,
+  Pie,
+} from "./pages";
+
+let activeMenu = true;
+
+const App = () => (
+  <>
+    <BrowserRouter>
+      <div className="flex relative dark:bg-main-dark-bg">
+        <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
+          <TooltipComponent content="Settings" position="Top">
+            <button
+              className="text-3xl bg-blue-500 
+            text-white p-3 rounded-full 
+              hover:drop-shadow-xl  hover:bg-blue-300
+            "
+            >
+              <FiSettings />
+            </button>
+          </TooltipComponent>
+        </div>
+      </div>
+
+      <div
+        className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${
+          activeMenu ? "md:ml-72" : "flex-2"
+        }`}
+      >
+        <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-ful">
+          <Navbar />
+        </div>
+      </div>
+
+      <Routes>
+        {/* Dashboard */}
+        <Route path="/" element={<ECommerce />} />
+        <Route path="/ecommerce" element={<ECommerce />} />
+
+        {/* Pages */}
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/employess" element={<Employees />} />
+        <Route path="/customers" element={<Customers />} />
+
+        {/* Apps */}
+        <Route path="/kanban" element={<Kanban />} />
+        <Route path="/editor" element={<Editor />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/color-picker" element={<ColorPicker />} />
+
+        {/* Charts */}
+        <Route path="/line" element={<Line />} />
+        <Route path="/area" element={<Area />} />
+        <Route path="/bar" element={<Bar />} />
+        <Route path="/pie" element={<Pie />} />
+        <Route path="/financial" element={<Financial />} />
+        <Route path="/color-mapping" element={<ColorMapping />} />
+        <Route path="/pyramid" element={<Pyramid />} />
+        <Route path="/stacked" element={<Stacked />} />
+      </Routes>
+    </BrowserRouter>
+  </>
+);
 
 export default App;
